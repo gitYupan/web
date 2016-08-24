@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemesh>
+    <!-- 默认装饰器 -->
+    <mapping path="/" decorator="/WEB-INF/templet/layout/default.jsp"/>
+
+    <!-- 排除，不进行装饰的路径 -->
+    <mapping path="/static/*" exclue="true"/>
+    <!--<content-processor>
+        <tag-rule-bundle class="org.sitemesh.DivExtractingIdRuleBundle"/>
+    </content-processor>-->
+</sitemesh>
