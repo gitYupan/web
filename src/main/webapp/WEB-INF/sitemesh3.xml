@@ -5,7 +5,7 @@
 
     <!-- 排除，不进行装饰的路径 -->
     <mapping path="/static/*" exclue="true"/>
-    <!--<content-processor>
-        <tag-rule-bundle class="org.sitemesh.DivExtractingIdRuleBundle"/>
-    </content-processor>-->
+    <content-processor>
+        <tag-rule-bundle class="com.yihou.common.sitemesh.PageJsRuleBundle"/>
+    </content-processor>
 </sitemesh>

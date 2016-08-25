@@ -22,13 +22,15 @@
 <body>
 
 <!-- 开始加入页面内容 -->
-<sitemesh:write property='body'/>
+<div>
+    <sitemesh:write property='body'/>
+</div>
 <!-- 加入页面内容结束 -->
 
 <!-- 系统默认js开始 -->
 <!-- 系统默认js结束 -->
 <!-- 页面自定义js开始 -->
-
+<sitemesh:write property='pagejs'/>
 <!-- 页面自定义js结束 -->
 </body>
 </html>

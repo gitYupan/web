@@ -4,6 +4,12 @@
     <title>系统主页</title>
 </head>
 <body>
+sdfsdaf
 
+<pagejs>
+    <script type="text/javascript">
+        console.info("123");
+    </script>
+</pagejs>
 </body>
 </html>
