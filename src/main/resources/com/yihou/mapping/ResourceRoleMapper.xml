@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yihou.dao.ResourceRoleMapper">
+
+    <sql id="Example_Where_Clause_Resource">
+        <if test="resourceExample.oredCriteria != null">
+            <foreach collection="resourceExample.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and a.${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and a.${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and a.${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and a.${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </if>
+    </sql>
+
+    <sql id="Example_Where_Clause_Role">
+        <if test="roleExample.oredCriteria != null">
+            <foreach collection="roleExample.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and c.${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and c.${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and c.${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and c.${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </if>
+    </sql>
+
+    <select id="fzlhcx" resultType="hashmap" parameterType="com.yihou.entity.ResourceRoleExample">
+        select
+        a.id, a.name, a.icon, a.seq, a.url, a.remark, a.isshow, a.resourceType, a.pid,
+        c.id roleId,c.name roleName,c.remark roleRemark,c.seq roleSeq,c.pid rolePid
+        from resource a
+        LEFT JOIN role_resource b ON a.id = b.resourceId
+        LEFT JOIN role c ON c.id = b.roleId
+        <where>
+            <if test="_parameter != null">
+                <trim prefix="(" suffix=")">
+                    <include refid="Example_Where_Clause_Resource"/>
+                </trim>
+                AND
+                <trim prefix="(" suffix=")">
+                    <include refid="Example_Where_Clause_Role"/>
+                </trim>
+            </if>
+        </where>
+    </select>
+
+
+</mapper>
