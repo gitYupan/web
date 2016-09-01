@@ -31,20 +31,4 @@ public class ResourceMapperTest {
         System.out.println("============================");
     }
 
-    @Test
-    public void testFzcx() {
-        ResourceRoleExample resourceRoleExample = new ResourceRoleExample();
-        System.out.println("============================");
-        ResourceExample resourceExample = new ResourceExample();
-        resourceExample.or().andIdEqualTo(1L);
-        resourceExample.or().andIdEqualTo(2L);
-        resourceRoleExample.setResourceExample(resourceExample);
-        RoleExample roleExample = new RoleExample();
-        roleExample.createCriteria().andIdEqualTo(2L);
-        resourceRoleExample.setRoleExample(roleExample);
-        System.out.println(resourceRoleMapper.fzlhcx(resourceRoleExample).size());
-        System.out.println("============================");
-    }
-
-
 }
