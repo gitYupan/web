@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yihou.dao.CoreUserMapper">
+    <resultMap id="BaseResultMap" type="com.yihou.dao.entity.CoreUser">
+        <id column="USER_ID" property="userId" jdbcType="BIGINT"/>
+        <result column="USER_CODE" property="userCode" jdbcType="VARCHAR"/>
+        <result column="USER_NAME" property="userName" jdbcType="VARCHAR"/>
+        <result column="USER_SALT" property="userSalt" jdbcType="VARCHAR"/>
+        <result column="USER_ADMIN" property="userAdmin" jdbcType="BIT"/>
+        <result column="CREATE_USER" property="createUser" jdbcType="BIGINT"/>
+        <result column="MODIFY_USER" property="modifyUser" jdbcType="BIGINT"/>
+        <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="MODIFY_DATE" property="modifyDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.yihou.dao.entity.CoreUser" extends="BaseResultMap">
+        <result column="USER_PASSWORD" property="userPassword" jdbcType="VARBINARY"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        USER_ID, USER_CODE, USER_NAME, USER_SALT, USER_ADMIN, CREATE_USER, MODIFY_USER, CREATE_DATE,
+        MODIFY_DATE
+    </sql>
+    <sql id="Blob_Column_List">
+        USER_PASSWORD
+    </sql>
+    <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.yihou.dao.entity.CoreUserExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from CORE_USER
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yihou.dao.entity.CoreUserExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from CORE_USER
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from CORE_USER
+        where USER_ID = #{userId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from CORE_USER
+        where USER_ID = #{userId,jdbcType=BIGINT}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.yihou.dao.entity.CoreUserExample">
+        delete from CORE_USER
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.yihou.dao.entity.CoreUser">
+        insert into CORE_USER (USER_ID, USER_CODE, USER_NAME,
+          USER_SALT, USER_ADMIN, CREATE_USER,
+          MODIFY_USER, CREATE_DATE, MODIFY_DATE,
+          USER_PASSWORD)
+        values (#{userId,jdbcType=BIGINT}, #{userCode,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
+          #{userSalt,jdbcType=VARCHAR}, #{userAdmin,jdbcType=BIT}, #{createUser,jdbcType=BIGINT},
+          #{modifyUser,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{modifyDate,jdbcType=TIMESTAMP},
+          #{userPassword,jdbcType=VARBINARY})
+    </insert>
+    <insert id="insertSelective" parameterType="com.yihou.dao.entity.CoreUser">
+        insert into CORE_USER
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                USER_ID,
+            </if>
+            <if test="userCode != null">
+                USER_CODE,
+            </if>
+            <if test="userName != null">
+                USER_NAME,
+            </if>
+            <if test="userSalt != null">
+                USER_SALT,
+            </if>
+            <if test="userAdmin != null">
+                USER_ADMIN,
+            </if>
+            <if test="createUser != null">
+                CREATE_USER,
+            </if>
+            <if test="modifyUser != null">
+                MODIFY_USER,
+            </if>
+            <if test="createDate != null">
+                CREATE_DATE,
+            </if>
+            <if test="modifyDate != null">
+                MODIFY_DATE,
+            </if>
+            <if test="userPassword != null">
+                USER_PASSWORD,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="userCode != null">
+                #{userCode,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userSalt != null">
+                #{userSalt,jdbcType=VARCHAR},
+            </if>
+            <if test="userAdmin != null">
+                #{userAdmin,jdbcType=BIT},
+            </if>
+            <if test="createUser != null">
+                #{createUser,jdbcType=BIGINT},
+            </if>
+            <if test="modifyUser != null">
+                #{modifyUser,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyDate != null">
+                #{modifyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userPassword != null">
+                #{userPassword,jdbcType=VARBINARY},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.yihou.dao.entity.CoreUserExample" resultType="java.lang.Integer">
+        select count(*) from CORE_USER
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update CORE_USER
+        <set>
+            <if test="record.userId != null">
+                USER_ID = #{record.userId,jdbcType=BIGINT},
+            </if>
+            <if test="record.userCode != null">
+                USER_CODE = #{record.userCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userName != null">
+                USER_NAME = #{record.userName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userSalt != null">
+                USER_SALT = #{record.userSalt,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userAdmin != null">
+                USER_ADMIN = #{record.userAdmin,jdbcType=BIT},
+            </if>
+            <if test="record.createUser != null">
+                CREATE_USER = #{record.createUser,jdbcType=BIGINT},
+            </if>
+            <if test="record.modifyUser != null">
+                MODIFY_USER = #{record.modifyUser,jdbcType=BIGINT},
+            </if>
+            <if test="record.createDate != null">
+                CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.modifyDate != null">
+                MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.userPassword != null">
+                USER_PASSWORD = #{record.userPassword,jdbcType=VARBINARY},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update CORE_USER
+        set USER_ID = #{record.userId,jdbcType=BIGINT},
+        USER_CODE = #{record.userCode,jdbcType=VARCHAR},
+        USER_NAME = #{record.userName,jdbcType=VARCHAR},
+        USER_SALT = #{record.userSalt,jdbcType=VARCHAR},
+        USER_ADMIN = #{record.userAdmin,jdbcType=BIT},
+        CREATE_USER = #{record.createUser,jdbcType=BIGINT},
+        MODIFY_USER = #{record.modifyUser,jdbcType=BIGINT},
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+        MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+        USER_PASSWORD = #{record.userPassword,jdbcType=VARBINARY}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update CORE_USER
+        set USER_ID = #{record.userId,jdbcType=BIGINT},
+        USER_CODE = #{record.userCode,jdbcType=VARCHAR},
+        USER_NAME = #{record.userName,jdbcType=VARCHAR},
+        USER_SALT = #{record.userSalt,jdbcType=VARCHAR},
+        USER_ADMIN = #{record.userAdmin,jdbcType=BIT},
+        CREATE_USER = #{record.createUser,jdbcType=BIGINT},
+        MODIFY_USER = #{record.modifyUser,jdbcType=BIGINT},
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+        MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yihou.dao.entity.CoreUser">
+        update CORE_USER
+        <set>
+            <if test="userCode != null">
+                USER_CODE = #{userCode,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                USER_NAME = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userSalt != null">
+                USER_SALT = #{userSalt,jdbcType=VARCHAR},
+            </if>
+            <if test="userAdmin != null">
+                USER_ADMIN = #{userAdmin,jdbcType=BIT},
+            </if>
+            <if test="createUser != null">
+                CREATE_USER = #{createUser,jdbcType=BIGINT},
+            </if>
+            <if test="modifyUser != null">
+                MODIFY_USER = #{modifyUser,jdbcType=BIGINT},
+            </if>
+            <if test="createDate != null">
+                CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyDate != null">
+                MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userPassword != null">
+                USER_PASSWORD = #{userPassword,jdbcType=VARBINARY},
+            </if>
+        </set>
+        where USER_ID = #{userId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yihou.dao.entity.CoreUser">
+        update CORE_USER
+        set USER_CODE = #{userCode,jdbcType=VARCHAR},
+          USER_NAME = #{userName,jdbcType=VARCHAR},
+          USER_SALT = #{userSalt,jdbcType=VARCHAR},
+          USER_ADMIN = #{userAdmin,jdbcType=BIT},
+          CREATE_USER = #{createUser,jdbcType=BIGINT},
+          MODIFY_USER = #{modifyUser,jdbcType=BIGINT},
+          CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+          MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+          USER_PASSWORD = #{userPassword,jdbcType=VARBINARY}
+        where USER_ID = #{userId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.yihou.dao.entity.CoreUser">
+        update CORE_USER
+        set USER_CODE = #{userCode,jdbcType=VARCHAR},
+          USER_NAME = #{userName,jdbcType=VARCHAR},
+          USER_SALT = #{userSalt,jdbcType=VARCHAR},
+          USER_ADMIN = #{userAdmin,jdbcType=BIT},
+          CREATE_USER = #{createUser,jdbcType=BIGINT},
+          MODIFY_USER = #{modifyUser,jdbcType=BIGINT},
+          CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+          MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP}
+        where USER_ID = #{userId,jdbcType=BIGINT}
+    </update>
+</mapper>

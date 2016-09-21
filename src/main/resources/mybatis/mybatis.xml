@@ -28,7 +28,7 @@
     </settings>
 
     <typeAliases>
-        <typeAlias alias="user" type="com.yihou.entity.User"/>
+        <!--<typeAlias alias="user" type="com.yihou.entity.User"/>-->
     </typeAliases>
 
     <!-- 插件配置 -->
