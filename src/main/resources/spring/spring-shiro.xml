@@ -17,6 +17,7 @@
         <property name="filterChainDefinitions">
             <value>
                 /static/** = anon
+                /demo/** = anon
                 /jcaptcha* = anon
                 /logout = logout
                 /login = authc

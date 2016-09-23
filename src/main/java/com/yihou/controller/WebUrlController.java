@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * 项目首页URL控制器
  */
 @Controller
-public class WebUrlContoller {
+public class WebUrlController {
 
     /**
      * 跳转到系统主页
