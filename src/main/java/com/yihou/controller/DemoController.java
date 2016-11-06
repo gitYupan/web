@@ -10,6 +10,7 @@ package com.yihou.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Description:
@@ -23,6 +24,12 @@ public class DemoController {
     @RequestMapping("/index")
     public String index() {
         return "/demo/index";
+    }
+
+    @RequestMapping("/arrayString")
+    @ResponseBody
+    public String postArray() {
+        return "123456";
     }
 
 }

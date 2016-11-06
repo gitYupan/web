@@ -64,7 +64,9 @@
     <script src="${pageContext.request.contextPath}/static/plugins/assets/0.0.1/js/main-navbar.js"></script>
     <script src="${pageContext.request.contextPath}/static/plugins/assets/0.0.1/js/jquery.slimscroll-1.3.2.js"></script>
     <script src="${pageContext.request.contextPath}/static/plugins/totop/0.0.1/js/toTop.js"></script>
-
+    <!--[if IE 8 ]>
+    <script src="${pageContext.request.contextPath}/static/plugins/assets/0.0.1/js/respond.min.js"></script>
+    <![endif]-->
     <script type="application/javascript">
         var tinyTplList=[];
         tinyTplList.push({sort:9, name: 'orange', title: '橙色', img: contextPath+'/static/img/themes/orange.png' });
@@ -162,6 +164,12 @@
                         <a href="#" class="navitem" title="控制台" data-treeid="0">
                             <i class="menu-icon fa fa-home"></i>
                             <span class="mm-text">控制台</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="navitem" title="UI元素" data-treeid="1">
+                            <i class="menu-icon fa fa-desktop"></i>
+                            <span class="mm-text">UI元素</span>
                         </a>
                     </li>
                 </ul>

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sitemesh>
+    <mine-type></mine-type>
     <!-- 默认装饰器 -->
     <mapping path="/" decorator="/WEB-INF/templet/layout/default.jsp"/>
+
+    <mapping path="/demo/*" decorator="/WEB-INF/templet/layout/demodefault.jsp"/>
 
     <!-- 排除，不进行装饰的路径 -->
     <mapping path="/static/*" exclue="true"/>
